@@ -1,12 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Form from './components/Form';
+import FriendsList from './components/FriendsList';
+
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+
 
 function App() {
+
+
+
+
   return (
-    <div className="App">
-     Hello
-    </div>
+
+    <Router>
+        <div className="App">
+          <Form/>
+          <FriendsList/>
+        </div>
+    </Router>
   );
 }
 

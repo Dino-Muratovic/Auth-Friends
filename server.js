@@ -60,9 +60,19 @@ function authenticator(req, res, next) {
   }
 }
 
+
+
+
+
+
+
+
+
+//* **[POST]** * to `/api/login`: returns a token to be added to the header of all other requests.
+// Pass in the following credentials as the `body` of the request: `{ username: 'lambda', password: 'school' }`
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
-  if (username === 'Lambda School' && password === 'i<3Lambd4') {
+  if (username === 'lambda' && password === 'school') {
     req.loggedIn = true;
     res.status(200).json({
       payload: token
@@ -74,12 +84,16 @@ app.post('/api/login', (req, res) => {
   }
 });
 
+
+//* **[GET]** to `/api/friends`: returns the list of friends.
 app.get('/api/friends', authenticator, (req, res) => {
   setTimeout(() => {
     res.send(friends);
   }, 1000);
 });
 
+
+//* **[GET]** to `/api/friends/123`: returns the friend with the id passed as part of the URL (123 in example).
 app.get('/api/friends/:id', authenticator, (req, res) => {
   const friend = friends.find(f => f.id == req.params.id);
 
@@ -90,6 +104,9 @@ app.get('/api/friends/:id', authenticator, (req, res) => {
   }
 });
 
+
+//* **[POST]** to `/api/friends`: creates a friend and return the new list of friends.
+// Pass the friend as the `body` of the request (the second argument passed to `axios.post`).
 app.post('/api/friends', authenticator, (req, res) => {
   const friend = { id: getNextId(), ...req.body };
 
@@ -98,6 +115,9 @@ app.post('/api/friends', authenticator, (req, res) => {
   res.send(friends);
 });
 
+
+//* **[PUT]** to `/api/friends/:id`: updates the friend using the `id` passed as part of the URL.
+// Send the an object with the updated information as the `body` of the request (the second argument passed to `axios.put`).
 app.put('/api/friends/:id', authenticator, (req, res) => {
   const { id } = req.params;
 
@@ -117,6 +137,8 @@ app.put('/api/friends/:id', authenticator, (req, res) => {
   }
 });
 
+
+//* **[DELETE]** to `/api/friends/123`: removes the friend using the `id` passed as part of the URL (123 in example).
 app.delete('/api/friends/:id', authenticator, (req, res) => {
   const { id } = req.params;
 
