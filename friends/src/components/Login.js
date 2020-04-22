@@ -3,7 +3,7 @@ import React from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
-class Form extends React.Component {
+class Login extends React.Component {
 
     state = {
         credentials: {
@@ -30,7 +30,7 @@ class Form extends React.Component {
         e.preventDefault();  
         axiosWithAuth()
         //we make a post request to the login endpoint , we send in our credentials.
-        .post("http://localhost:5000/api/login", this.state.credentials)
+        .post("/api/login", this.state.credentials)
         .then (res => {
             // res.data.payload is my token
             // redux - send the token to redux store
@@ -78,4 +78,4 @@ class Form extends React.Component {
     }
 }
 
-export default Form;
+export default Login;

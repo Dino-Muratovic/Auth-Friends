@@ -1,9 +1,12 @@
 import React from 'react';
 import './App.css';
-import Form from './components/Form';
+import Login from './components/Login';
 import FriendsList from './components/FriendsList';
 
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
+
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 
 
 function App() {
@@ -14,9 +17,13 @@ function App() {
   return (
 
     <Router>
+
         <div className="App">
-          <Form/>
-          <FriendsList/>
+            
+                <Route exact path="/login" component={Login}/> 
+                {/* <ProtectedRoute path="/friendslist" component={AddFriend}/>  */}
+                <ProtectedRoute path="/protected" component={FriendsList} />  
+             
         </div>
     </Router>
   );
